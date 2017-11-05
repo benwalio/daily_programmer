@@ -4,21 +4,35 @@
 
 import sys
 
-togEorD = input("Would you like to (e)ncode or (d)ecode? - ")
-message = input("What is your message? - ")
+togEorD = raw_input("Would you like to (e)ncode or (d)ecode? - ")
+message = raw_input("What is your message? - ")
 cipherShift = input("What is your shift? - ")
 
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+outMessage = ""
+
 def encodeCaesar(message, cipherShift):
-    
+    result = ""
+    for i in message.lower():
+        l = (alphabet.index(i) + cipherShift) % 26
+        result += alphabet[l]
+
+    return result.lower()
 
 def decodeCaesar(message, cipherShift):
+    result = ""
+    for i in message.lower():
+        l = (alphabet.index(i) - cipherShift) % 26
+        result += alphabet[l]
 
-
-
+    return result.lower()
 
 if togEorD == "e":
-    encodeCaesar(message, cipherShift)
+    outMessage = encodeCaesar(message, cipherShift)
 elif togEorD == "d":
-    decodeCaesar(message, cipherShift)
+    outMessage = decodeCaesar(message, cipherShift)
 else:
     sys.exit()
+
+print(outMessage)
